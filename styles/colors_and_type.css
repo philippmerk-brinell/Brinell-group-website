@@ -1,0 +1,238 @@
+/* ============================================================
+   Brinell Group — Colors & Type
+   Cinema-black, monochromatic, monumental. Inspired by Bugatti.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* -------- COLOR TOKENS -------- */
+  /* Core palette — only three colors at rest. */
+  --velvet-black: #000000;      /* The canvas. Pure HTML black. */
+  --showroom-white: #ffffff;    /* All text, borders, CTAs. */
+  --silver-mist: #999999;       /* Single gray — disabled, tertiary, hairlines. */
+
+  /* Semantic aliases */
+  --bg: var(--velvet-black);
+  --fg: var(--showroom-white);
+  --fg-tertiary: var(--silver-mist);
+  --border-primary: var(--showroom-white);
+  --border-hairline: var(--silver-mist);
+
+  /* Legibility vignette — bottom-up scrim over media. */
+  --vignette: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+
+  /* ---- GLASS / DEPTH ---- */
+  /* Translucent frosted-glass panels for boxes, cards, and buttons placed
+     over media or atmospheric backdrops. One layer only — do not stack. */
+  --glass-fill-light: rgba(255, 255, 255, 0.06);
+  --glass-fill-heavy: rgba(255, 255, 255, 0.10);
+  --glass-stroke:     rgba(255, 255, 255, 0.22);
+  --glass-stroke-strong: rgba(255, 255, 255, 0.35);
+  --glass-highlight:  inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  --glass-blur:       blur(18px) saturate(140%);
+  --glass-blur-heavy: blur(24px) saturate(160%);
+
+  /* -------- FONT FAMILIES -------- */
+  /* Display — sculptural, architectural. Used at 36px+, ideally 60px+.
+     Substitute: Archivo Black (close in weight + geometry to Brinell wordmark). */
+  --font-display: 'Archivo Black', 'Anton', 'Helvetica Neue', ui-sans-serif, system-ui, sans-serif;
+
+  /* Monospace — owns the UI. Every button, nav link, caption, eyebrow.
+     Substitute: JetBrains Mono. */
+  --font-mono: 'JetBrains Mono', 'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Text — invisible body face, short paragraphs only.
+     Substitute: Inter. */
+  --font-text: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* -------- TYPE SCALE -------- */
+  /* Display (sculpture). Line-height 1.0–1.11. No letter-spacing at small sizes. */
+  --fs-hero-monumental: 288px;   /* 18rem — once per page max, architectural */
+  --fs-hero-large: 200px;        /* Ultra-wide / large desktop */
+  --fs-hero-desktop: 120px;      /* Standard desktop hero */
+  --fs-display-mid: 60px;        /* Mid-display, feature panels */
+  --fs-display-section: 36px;    /* Section heading */
+
+  /* Body */
+  --fs-lead: 20px;
+  --fs-body: 16px;
+  --fs-body-compact: 14px;
+
+  /* UI — mono, usually UPPERCASE with 1.2–1.4px tracking */
+  --fs-ui: 14px;
+  --fs-ui-compact: 12px;
+
+  /* -------- SPACING — six discrete values, no in-between -------- */
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 12px;
+  --space-4: 36px;
+  --space-5: 48px;
+  --space-6: 64px;
+
+  /* -------- RADIUS — rectangle, slightly-rounded utility, or full pill -------- */
+  --radius-0: 0;
+  --radius-utility: 6px;
+  --radius-pill: 9999px;
+
+  /* -------- TRACKING -------- */
+  --track-mono-caps: 1.4px;      /* Primary nav, primary buttons, captions */
+  --track-mono-caps-compact: 1.2px; /* Secondary / compact buttons */
+
+  /* -------- MOTION — quiet, never bouncy -------- */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 200ms;
+  --dur-base: 250ms;
+  --dur-slow: 300ms;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-text);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+/* ============================================================
+   TYPOGRAPHY ROLES
+   ============================================================ */
+
+/* Monumental hero — the architectural moment. Use once per page, for short strings ideally ≤2 words. */
+.t-hero-monumental {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 18vw, 288px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* Mid display — feature panels */
+.t-display-mid {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 60px);
+  font-weight: 400;
+  line-height: 1.0;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* Section heading */
+.t-display-section {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-section);
+  font-weight: 400;
+  line-height: 1.11;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* Mono monumental — technical section labels at hero scale */
+.t-mono-monumental {
+  font-family: var(--font-mono);
+  font-size: var(--fs-display-mid);
+  font-weight: 400;
+  line-height: 1.0;
+  text-transform: uppercase;
+  letter-spacing: var(--track-mono-caps);
+  color: var(--fg);
+}
+
+/* Lead body */
+.t-lead {
+  font-family: var(--font-text);
+  font-size: var(--fs-lead);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--fg);
+}
+
+/* Standard body */
+.t-body {
+  font-family: var(--font-text);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+/* Compact body */
+.t-body-compact {
+  font-family: var(--font-text);
+  font-size: var(--fs-body-compact);
+  font-weight: 400;
+  line-height: 1.43;
+  color: var(--fg);
+}
+
+/* UI link — UPPERCASE mono, primary nav + link style */
+.t-ui-link {
+  font-family: var(--font-mono);
+  font-size: var(--fs-ui);
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: var(--track-mono-caps);
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+}
+.t-ui-link:hover { opacity: 0.75; }
+
+/* Eyebrow / caption caps */
+.t-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-ui);
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: var(--track-mono-caps);
+  text-transform: uppercase;
+  color: var(--fg-tertiary);
+}
+
+/* Caption — plain case mono */
+.t-caption {
+  font-family: var(--font-mono);
+  font-size: var(--fs-ui);
+  font-weight: 400;
+  line-height: 1.43;
+  color: var(--fg);
+}
+
+/* Micro caps — smallest tag label */
+.t-micro-caps {
+  font-family: var(--font-mono);
+  font-size: var(--fs-ui-compact);
+  font-weight: 400;
+  line-height: 1.33;
+  letter-spacing: var(--track-mono-caps-compact);
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* ============================================================
+   SEMANTIC ELEMENTS
+   ============================================================ */
+h1 { font-family: var(--font-display); font-size: clamp(48px, 10vw, 120px); font-weight: 400; line-height: 1.0; text-transform: uppercase; margin: 0; }
+h2 { font-family: var(--font-display); font-size: clamp(36px, 5vw, 60px);  font-weight: 400; line-height: 1.0; text-transform: uppercase; margin: 0; }
+h3 { font-family: var(--font-display); font-size: var(--fs-display-section); font-weight: 400; line-height: 1.11; text-transform: uppercase; margin: 0; }
+h4 { font-family: var(--font-mono);    font-size: var(--fs-ui); font-weight: 400; line-height: 1.43; letter-spacing: var(--track-mono-caps); text-transform: uppercase; margin: 0; }
+
+p  { font-family: var(--font-text); font-size: var(--fs-body); font-weight: 400; line-height: 1.5; margin: 0; }
+a  { color: inherit; text-decoration: none; }
+
+code, pre, kbd {
+  font-family: var(--font-mono);
+  font-size: var(--fs-ui-compact);
+  letter-spacing: var(--track-mono-caps-compact);
+}
+
+::selection { background: var(--showroom-white); color: var(--velvet-black); }

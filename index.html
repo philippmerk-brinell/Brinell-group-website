@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Brinell Group — Building Europe's Next Champions</title>
+  <link rel="icon" href="assets/brinell-icon-white.png"/>
+  <link rel="stylesheet" href="styles/colors_and_type.css"/>
+  <style>
+    html, body { margin: 0; background: #000; color: #fff; }
+    body { font-family: 'Inter', sans-serif; }
+    #app { min-height: 100vh; }
+    * { box-sizing: border-box; }
+    a { color: inherit; }
+    button { font-family: inherit; }
+    ::selection { background: #fff; color: #000; }
+    /* Page transition */
+    .page-enter { animation: pageFade 400ms cubic-bezier(0.4,0,0.2,1); }
+    @keyframes pageFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    /* Simple scroll polish */
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
+
+  <script type="text/babel" src="components/Button.jsx"></script>
+  <script type="text/babel" src="components/Nav.jsx"></script>
+  <script type="text/babel" src="components/Footer.jsx"></script>
+  <script type="text/babel" src="pages/HomePage.jsx"></script>
+  <script type="text/babel" src="pages/CareersPage.jsx"></script>
+  <script type="text/babel" src="pages/ImprintPage.jsx"></script>
+
+  <script type="text/babel">
+    const ROUTES = ['home', 'careers', 'imprint'];
+    const getRouteFromHash = () => {
+      const h = (window.location.hash || '').replace(/^#\/?/, '');
+      return ROUTES.includes(h) ? h : 'home';
+    };
+
+    const App = () => {
+      const [route, setRoute] = React.useState(getRouteFromHash());
+      const [scrolled, setScrolled] = React.useState(false);
+
+      React.useEffect(() => {
+        const onScroll = () => setScrolled(window.scrollY > 60);
+        window.addEventListener('scroll', onScroll);
+        const onHash = () => setRoute(getRouteFromHash());
+        window.addEventListener('hashchange', onHash);
+        return () => {
+          window.removeEventListener('scroll', onScroll);
+          window.removeEventListener('hashchange', onHash);
+        };
+      }, []);
+
+      const go = (to) => {
+        if (!ROUTES.includes(to)) to = 'home';
+        window.location.hash = `#/${to}`;
+        setRoute(to);
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      };
+
+      let Page = HomePage;
+      if (route === 'careers') Page = CareersPage;
+      else if (route === 'imprint') Page = ImprintPage;
+
+      return (
+        <div data-screen-label={`Route · ${route}`}>
+          <Nav route={route} go={go} scrolled={scrolled}/>
+          <main key={route} className="page-enter">
+            <Page go={go}/>
+          </main>
+          <Footer go={go}/>
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('app')).render(<App/>);
+  </script>
+</body>
+</html>
