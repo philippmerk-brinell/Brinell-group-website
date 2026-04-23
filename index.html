@@ -32,6 +32,7 @@
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
 
+  <script type="text/babel" src="i18n/dict.jsx"></script>
   <script type="text/babel" src="components/Button.jsx"></script>
   <script type="text/babel" src="components/Nav.jsx"></script>
   <script type="text/babel" src="components/Footer.jsx"></script>
@@ -83,7 +84,9 @@
       );
     };
 
-    ReactDOM.createRoot(document.getElementById('app')).render(<App/>);
+    ReactDOM.createRoot(document.getElementById('app')).render(
+      <LangProvider><App/></LangProvider>
+    );
   </script>
 </body>
 </html>

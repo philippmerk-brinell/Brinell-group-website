@@ -1,5 +1,6 @@
 // ImprintPage.jsx — Legal disclosure page (§ 5 TMG)
 const ImprintPage = ({ go }) => {
+  const t = useT();
   const eyebrow = {
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: 12,
@@ -50,7 +51,7 @@ const ImprintPage = ({ go }) => {
         }}
       >
         <div style={{ maxWidth: 1720, margin: '0 auto' }}>
-          <div style={eyebrow}>· Legal</div>
+          <div style={eyebrow}>{t('imprint.eyebrow')}</div>
           <h1 style={{
             fontFamily: "'Archivo Black', sans-serif",
             fontSize: 'clamp(72px, 12vw, 200px)',
@@ -60,7 +61,7 @@ const ImprintPage = ({ go }) => {
             margin: 0,
             fontWeight: 400,
           }}>
-            Imprint
+            {t('imprint.title')}
           </h1>
         </div>
       </section>
@@ -81,31 +82,31 @@ const ImprintPage = ({ go }) => {
           flexDirection: 'column',
           gap: 0,
         }}>
-          <Row label="Information in accordance with § 5 of the German Telemedia Act (TMG)">
+          <Row label={t('imprint.tmg.label')}>
             Brinell Group GmbH & Co KG<br/>
             Karlstraße 47<br/>
-            80333 Munich
+            80333 München
           </Row>
 
           <div style={divider}/>
 
-          <Row label="Contact">
-            contact (at) brinell-group.com
+          <Row label={t('imprint.contact.label')}>
+            {t('imprint.contact.value')}
           </Row>
 
           <div style={divider}/>
 
-          <Row label="Managing Directors">
+          <Row label={t('imprint.directors.label')}>
             Adrian Kapsalis<br/>
             Philipp Merk
           </Row>
 
           <div style={divider}/>
 
-          <Row label="Responsible for content pursuant to § 55 para. 2 RStV">
+          <Row label={t('imprint.responsible.label')}>
             Brinell Group GmbH & Co KG<br/>
             Karlstraße 47<br/>
-            80333 Munich
+            80333 München
           </Row>
         </div>
       </section>

@@ -1,5 +1,6 @@
 // Footer.jsx — Shared across all pages
 const Footer = ({ go }) => {
+  const t = useT();
   const colTitle = {
     fontFamily: "'JetBrains Mono', monospace",
     fontSize: 12,
@@ -69,14 +70,14 @@ const Footer = ({ go }) => {
             </div>
           </div>
           <div>
-            <div style={colTitle}>Company</div>
+            <div style={colTitle}>{t('footer.col.company')}</div>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <li><NavBtn to="home">Home</NavBtn></li>
-              <li><NavBtn to="careers">Careers</NavBtn></li>
+              <li><NavBtn to="home">{t('nav.home')}</NavBtn></li>
+              <li><NavBtn to="careers">{t('nav.careers')}</NavBtn></li>
             </ul>
           </div>
           <div>
-            <div style={colTitle}>Contact</div>
+            <div style={colTitle}>{t('footer.col.contact')}</div>
             <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, letterSpacing: '0.6px', color: '#fff', lineHeight: 1.7 }}>
               contact (at) brinell-group.com<br/>
             </div>
@@ -154,7 +155,7 @@ const Footer = ({ go }) => {
           textTransform: 'uppercase',
           color: '#999',
         }}>
-          <div>© 2026 Brinell Group GmbH & Co KG · All rights reserved</div>
+          <div>{t('footer.copyright')}</div>
           <div style={{ display: 'flex', gap: 24 }}>
             <button
               onClick={() => go('imprint')}
@@ -172,8 +173,8 @@ const Footer = ({ go }) => {
               }}
               onMouseOver={e => e.currentTarget.style.color = '#fff'}
               onMouseOut={e => e.currentTarget.style.color = '#999'}
-            >Imprint</button>
-            <a href="#" style={{ color: '#999', textDecoration: 'none' }}>LinkedIn</a>
+            >{t('footer.imprint')}</button>
+            <a href="#" style={{ color: '#999', textDecoration: 'none' }}>{t('footer.linkedin')}</a>
           </div>
         </div>
       </div>
