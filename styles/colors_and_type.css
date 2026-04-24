@@ -236,3 +236,82 @@ code, pre, kbd {
 }
 
 ::selection { background: var(--showroom-white); color: var(--velvet-black); }
+
+/* ============================================================
+   RESPONSIVE
+   Utility classes applied alongside inline styles.
+   Media queries use !important to override inline declarations.
+   Breakpoints: tablet ≤1024px, mobile ≤768px.
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .r-sec-h { padding-left: 32px !important; padding-right: 32px !important; }
+  .r-sec-v-xl { padding-top: 140px !important; padding-bottom: 140px !important; }
+  .r-sec-v-lg { padding-top: 110px !important; padding-bottom: 110px !important; }
+  .r-sec-v-mix-xl { padding-top: 160px !important; padding-bottom: 64px !important; }
+  .r-sec-v-mix-md { padding-top: 24px !important; padding-bottom: 120px !important; }
+  .r-grid-split { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .r-footer-grid { gap: 36px !important; }
+  .r-nav-bar { padding: 14px 32px !important; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .r-sec-h { padding-left: 20px !important; padding-right: 20px !important; }
+  .r-sec-v-xl { padding-top: 96px !important; padding-bottom: 96px !important; }
+  .r-sec-v-lg { padding-top: 80px !important; padding-bottom: 80px !important; }
+  .r-sec-v-mix-xl { padding-top: 120px !important; padding-bottom: 48px !important; }
+  .r-sec-v-mix-md { padding-top: 16px !important; padding-bottom: 96px !important; }
+
+  .r-grid-split { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .r-grid-2 { grid-template-columns: 1fr !important; }
+  .r-grid-3 { grid-template-columns: 1fr !important; }
+  .r-roles-row { grid-template-columns: 1fr !important; gap: 8px !important; padding: 24px 0 !important; }
+
+  /* Stats cards: side-by-side borders become stacked bottom borders */
+  .r-stat-card {
+    border-right: none !important;
+    padding: 36px 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+    transform-origin: left center !important;
+  }
+  .r-stat-card-last { border-bottom: none !important; }
+
+  /* Pillar tiles: kill the computed desktop paddings/borders/outset */
+  .r-pillar-tile {
+    padding: 48px 0 !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+  }
+  .r-pillar-tile-last { border-bottom: none !important; }
+  .r-pillar-outset { margin: 0 !important; }
+
+  /* Principle cards (careers) */
+  .r-principle-card {
+    padding: 40px 20px 44px !important;
+    min-height: auto !important;
+    border-right: none !important;
+  }
+
+  /* Footer */
+  .r-footer { padding: 96px 20px 32px !important; }
+  .r-footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; padding-bottom: 48px !important; }
+  .r-footer-bottom {
+    flex-direction: column !important;
+    gap: 14px !important;
+    align-items: flex-start !important;
+  }
+
+  /* Nav: tighter on mobile */
+  .r-nav-bar { padding: 10px 20px !important; }
+  .r-nav-logo { height: 36px !important; }
+  .r-nav-links { gap: 18px !important; }
+
+  /* Careers apply CTA — let it breathe on small screens */
+  .r-apply { padding: 96px 20px !important; }
+
+  /* Imprint hero */
+  .r-imprint-hero { padding: 140px 20px 48px !important; }
+  .r-imprint-body { padding: 16px 20px 96px !important; }
+}

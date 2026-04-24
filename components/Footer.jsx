@@ -38,6 +38,7 @@ const Footer = ({ go }) => {
     <footer
       id="contact"
       data-screen-label="Footer"
+      className="r-footer"
       style={{
         background: '#000',
         color: '#fff',
@@ -48,7 +49,7 @@ const Footer = ({ go }) => {
       }}
     >
       <div style={{ maxWidth: 1720, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-        <div style={{
+        <div className="r-footer-grid" style={{
           display: 'grid',
           gridTemplateColumns: '1.6fr 1fr 1fr',
           gap: 48,
@@ -143,7 +144,7 @@ const Footer = ({ go }) => {
           </div>
         </div>
 
-        <div style={{
+        <div className="r-footer-bottom" style={{
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
