@@ -4,6 +4,7 @@ const CareersHero = () => {
   return (
     <section
       data-screen-label="01 Careers Hero"
+      className="r-sec-h"
       style={{
         position: 'relative',
         minHeight: 'calc(100vh + 10px)',
@@ -122,6 +123,7 @@ const PrincipleCard = ({ num, index, label, body, total }) => {
   return (
     <article
       ref={ref}
+      className="r-principle-card"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
@@ -201,10 +203,11 @@ const CareersWhy = () => {
   return (
     <section
       data-screen-label="02 Principles"
+      className="r-sec-h r-sec-v-lg"
       style={{ background: '#000', color: '#fff', padding: '140px 48px' }}
     >
       <div style={{ maxWidth: 1720, margin: '0 auto' }}>
-        <div style={{
+        <div className="r-grid-split" style={{
           display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 96,
           alignItems: 'end', marginBottom: 80,
         }}>
@@ -233,7 +236,7 @@ const CareersWhy = () => {
           </p>
         </div>
 
-        <div style={{
+        <div className="r-grid-2" style={{
           display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 0,
           borderTop: '1px solid rgba(255,255,255,0.08)',
         }}>
@@ -260,6 +263,7 @@ const CareersRoles = () => {
   return (
     <section
       data-screen-label="03 Open Roles"
+      className="r-sec-h r-sec-v-lg"
       style={{
         background: '#000', color: '#fff', padding: '140px 48px',
         borderTop: '1px solid #1a1a1a',
@@ -296,6 +300,7 @@ const CareersRoles = () => {
               href={r.href || '#'}
               target={r.href ? '_blank' : undefined}
               rel={r.href ? 'noopener noreferrer' : undefined}
+              className="r-roles-row"
               style={{
                 display: 'grid', gridTemplateColumns: '1fr auto',
                 alignItems: 'center', gap: 36, padding: '28px 0',
@@ -343,13 +348,14 @@ const CareersProcess = () => {
   return (
     <section
       data-screen-label="04 Process"
+      className="r-sec-h r-sec-v-lg"
       style={{
         background: '#000', color: '#fff', padding: '140px 48px',
         borderTop: '1px solid #1a1a1a',
       }}
     >
       <div style={{ maxWidth: 1720, margin: '0 auto' }}>
-        <div style={{
+        <div className="r-grid-split" style={{
           display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 96,
           alignItems: 'end', marginBottom: 80,
         }}>
@@ -378,7 +384,7 @@ const CareersProcess = () => {
           </p>
         </div>
 
-        <div style={{
+        <div className="r-grid-2" style={{
           display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 0,
           borderTop: '1px solid rgba(255,255,255,0.08)',
         }}>
@@ -397,6 +403,7 @@ const CareersApply = () => {
   return (
     <section
       data-screen-label="05 Apply"
+      className="r-apply"
       style={{
         position: 'relative', overflow: 'hidden',
         background: '#000', color: '#fff', padding: '160px 48px',

@@ -182,13 +182,14 @@ const Nav = ({ route, go, scrolled }) => {
 
   return (
     <div style={outerStyle}>
-      <nav style={innerStyle}>
+      <nav className="r-nav-bar" style={innerStyle}>
         <a
           onClick={(e) => { e.preventDefault(); go('home'); }}
           href="#/home"
           style={{ display: 'flex', alignItems: 'center' }}
         >
           <img
+            className="r-nav-logo"
             src="assets/brinell-wordmark-white.png"
             alt="Brinell Group"
             style={{
@@ -198,7 +199,7 @@ const Nav = ({ route, go, scrolled }) => {
           />
         </a>
         <div/>
-        <div style={{ display: 'flex', gap: 36, alignItems: 'center', justifyContent: 'flex-end' }}>
+        <div className="r-nav-links" style={{ display: 'flex', gap: 36, alignItems: 'center', justifyContent: 'flex-end' }}>
           <NavLink to="home">{t('nav.home')}</NavLink>
           <NavLink to="careers">{t('nav.careers')}</NavLink>
           <LangSwitch/>

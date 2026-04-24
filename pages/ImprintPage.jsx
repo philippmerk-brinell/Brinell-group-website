@@ -44,6 +44,7 @@ const ImprintPage = ({ go }) => {
       {/* Hero */}
       <section
         data-screen-label="01 Imprint Hero"
+        className="r-imprint-hero"
         style={{
           background: '#000',
           color: '#fff',
@@ -69,6 +70,7 @@ const ImprintPage = ({ go }) => {
       {/* Content */}
       <section
         data-screen-label="02 Imprint Content"
+        className="r-imprint-body"
         style={{
           background: '#000',
           color: '#fff',

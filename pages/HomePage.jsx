@@ -4,6 +4,7 @@ const HomeHero = () => {
   return (
     <section
       data-screen-label="01 Home Hero"
+      className="r-sec-h"
       style={{
         position: 'relative',
         minHeight: 'calc(100vh + 10px)',
@@ -93,6 +94,7 @@ const HomeIntro = ({ go }) => {
   return (
     <section
       data-screen-label="02 Home Intro"
+      className="r-sec-h r-sec-v-xl"
       style={{
         position: 'relative', overflow: 'hidden', background: '#000', color: '#fff',
         padding: '220px 48px',
@@ -121,7 +123,7 @@ const HomeIntro = ({ go }) => {
         pointerEvents: 'none',
       }}/>
 
-      <div style={{
+      <div className="r-grid-split" style={{
         position: 'relative', maxWidth: 1720, margin: '0 auto',
         display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 96, alignItems: 'start',
       }}>
@@ -172,6 +174,7 @@ const StatCard = ({ s, i }) => {
   const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
   return (
     <div
+      className={`r-stat-card${i === 2 ? ' r-stat-card-last' : ''}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
@@ -215,6 +218,7 @@ const HomeStats = () => {
   return (
     <section
       data-screen-label="03 Home Stats"
+      className="r-sec-h r-sec-v-xl"
       style={{
         position: 'relative', overflow: 'hidden', background: '#000', color: '#fff',
         padding: '220px 48px',
@@ -241,7 +245,7 @@ const HomeStats = () => {
           </div>
         </div>
 
-        <div style={{
+        <div className="r-grid-3" style={{
           display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0,
           borderTop: '1px solid rgba(255,255,255,0.2)',
         }}>
@@ -310,10 +314,11 @@ const HomePillars = () => {
   return (
     <section
       data-screen-label="04 Home Pillars"
+      className="r-sec-h r-sec-v-xl"
       style={{ background: '#000', color: '#fff', padding: '220px 48px' }}
     >
       <div style={{ maxWidth: 1720, margin: '0 auto' }}>
-        <div style={{
+        <div className="r-grid-split" style={{
           display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 96,
           alignItems: 'end', marginBottom: 72,
         }}>
@@ -339,7 +344,7 @@ const HomePillars = () => {
           }}>{"\n"}</p>
         </div>
 
-        <div style={{
+        <div className="r-grid-2" style={{
           display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 0,
           borderTop: '1px solid rgba(255,255,255,0.2)',
         }}>
@@ -354,9 +359,11 @@ const HomePillars = () => {
               marginLeft: col === 1 ? -padSide : 0,
               marginBottom: 0,
             };
+            const isLast = i === tiles.length - 1;
             return (
               <article
                 key={i}
+                className={`r-pillar-tile${isLast ? ' r-pillar-tile-last' : ''}`}
                 style={{
                   padding: row === 0
                     ? (col === 0 ? `${padTop}px ${padSide}px 56px 0` : `${padTop}px 0 56px ${padSide}px`)
@@ -365,7 +372,7 @@ const HomePillars = () => {
                   borderBottom: row === 0 ? '1px solid rgba(255,255,255,0.2)' : 'none',
                 }}
               >
-                <div style={tileOutset}>
+                <div className="r-pillar-outset" style={tileOutset}>
                   <ImageTile tone={tile.tone} video={tile.video}/>
                 </div>
                 <div style={{
@@ -425,6 +432,7 @@ const HomeClosing = ({ go }) => {
   return (
     <section
       data-screen-label="06 Home Closing"
+      className="r-sec-h"
       style={{
         position: 'relative', minHeight: '92vh', overflow: 'hidden',
         background: '#000', color: '#fff',
@@ -449,7 +457,7 @@ const HomeClosing = ({ go }) => {
         pointerEvents: 'none',
       }}/>
 
-      <div style={{
+      <div className="r-grid-split" style={{
         position: 'relative', padding: '0 0 160px',
         maxWidth: 1720, width: '100%', margin: '0 auto',
         display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: 96, alignItems: 'end',
