@@ -281,9 +281,16 @@ code, pre, kbd {
 .bg-tiles-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid rgba(255,255,255,0.15); }
 @media (max-width: 900px) {
   .bg-tiles-2 { grid-template-columns: 1fr; }
-  /* Collapse any right-borders and reset the desktop negative-margin image outsets. */
-  .bg-tiles-2 > * { border-right: none !important; }
-  .bg-tiles-2 .bg-tile-outset { margin-left: 0 !important; margin-right: 0 !important; margin-top: 0 !important; }
+  /* Collapse the desktop 2-col geometry: kill right borders, neutralize the asymmetric
+     per-column inline padding (left 48 / right 48 alternation), and reset the image
+     outset negative margins. Add a hairline separator between stacked tiles instead. */
+  .bg-tiles-2 > * {
+    border-right: none !important;
+    padding: 40px 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .bg-tiles-2 > *:last-child { border-bottom: none; }
+  .bg-tiles-2 .bg-tile-outset { margin: 0 !important; }
 }
 
 /* ---- Roles list: title + details on one row → stack ---- */

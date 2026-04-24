@@ -253,16 +253,31 @@ const HomeStats = () => {
 const ImageTile = ({ tone = 'dark', label, video }) => {
   const videoRef = React.useRef(null);
   const [hover, setHover] = React.useState(false);
+  const [isTouch, setIsTouch] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      const mq = window.matchMedia('(hover: none)');
+      const update = () => setIsTouch(mq.matches);
+      update();
+      if (mq.addEventListener) mq.addEventListener('change', update);
+      else mq.addListener(update);
+      return () => {
+        if (mq.removeEventListener) mq.removeEventListener('change', update);
+        else mq.removeListener(update);
+      };
+    }
+  }, []);
   React.useEffect(() => {
     const v = videoRef.current;
     if (!video || !v) return;
-    if (hover) {
-      v.play().catch(() => {});
+    if (isTouch || hover) {
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
     } else {
       v.pause();
       try { v.currentTime = 0; } catch (e) {}
     }
-  }, [hover, video]);
+  }, [hover, video, isTouch]);
   const edgeFadeMask = 'radial-gradient(ellipse 78% 75% at 50% 50%, #000 38%, rgba(0,0,0,0.85) 62%, transparent 100%)';
   return (
     <div
@@ -275,7 +290,10 @@ const ImageTile = ({ tone = 'dark', label, video }) => {
     >
       {video && (
         <video
-          ref={videoRef} src={video} loop muted playsInline preload="metadata" aria-hidden="true"
+          ref={videoRef} src={video} loop muted playsInline
+          autoPlay={isTouch}
+          preload={isTouch ? 'auto' : 'metadata'}
+          aria-hidden="true"
           style={{
             position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
             filter: 'grayscale(1) contrast(1.08) brightness(0.78)',
