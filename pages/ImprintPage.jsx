@@ -44,18 +44,17 @@ const ImprintPage = ({ go }) => {
       {/* Hero */}
       <section
         data-screen-label="01 Imprint Hero"
-        className="r-imprint-hero"
+        className="bg-imprint-hero"
         style={{
           background: '#000',
           color: '#fff',
-          padding: '220px 48px 96px',
         }}
       >
         <div style={{ maxWidth: 1720, margin: '0 auto' }}>
           <div style={eyebrow}>{t('imprint.eyebrow')}</div>
           <h1 style={{
             fontFamily: "'Archivo Black', sans-serif",
-            fontSize: 'clamp(72px, 12vw, 200px)',
+            fontSize: 'clamp(56px, 12vw, 200px)',
             lineHeight: 0.95,
             letterSpacing: '-0.02em',
             textTransform: 'uppercase',
@@ -70,11 +69,10 @@ const ImprintPage = ({ go }) => {
       {/* Content */}
       <section
         data-screen-label="02 Imprint Content"
-        className="r-imprint-body"
+        className="bg-imprint-content"
         style={{
           background: '#000',
           color: '#fff',
-          padding: '32px 48px 160px',
         }}
       >
         <div style={{

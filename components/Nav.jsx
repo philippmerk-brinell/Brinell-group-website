@@ -2,6 +2,18 @@
 const Nav = ({ route, go, scrolled }) => {
   const t = useT();
   const { lang, setLang } = useLang();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  // Close mobile menu on route change
+  React.useEffect(() => { setMobileOpen(false); }, [route]);
+  // Lock body scroll while open
+  React.useEffect(() => {
+    if (mobileOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => { document.body.style.overflow = prev; };
+    }
+  }, [mobileOpen]);
 
   const linkBase = {
     fontFamily: "'JetBrains Mono', monospace",
@@ -17,12 +29,12 @@ const Nav = ({ route, go, scrolled }) => {
     transition: 'opacity 250ms cubic-bezier(0.4,0,0.2,1)',
   };
 
-  const NavLink = ({ to, children }) => {
+  const NavLink = ({ to, children, onClick }) => {
     const active = route === to;
     const [hover, setHover] = React.useState(false);
     return (
       <a
-        onClick={(e) => { e.preventDefault(); go(to); }}
+        onClick={(e) => { e.preventDefault(); if (onClick) onClick(); go(to); }}
         href={`#/${to}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
@@ -40,7 +52,7 @@ const Nav = ({ route, go, scrolled }) => {
   };
 
   // Language dropdown — compact, monospace, opens on click, dismisses on outside click / Esc.
-  const LangSwitch = () => {
+  const LangSwitch = ({ variant = 'inline' }) => {
     const [open, setOpen] = React.useState(false);
     const [hover, setHover] = React.useState(false);
     const wrapRef = React.useRef(null);
@@ -159,18 +171,15 @@ const Nav = ({ route, go, scrolled }) => {
     pointerEvents: 'none',
   };
 
-  // Inner bar: full-width strip. On scroll, it adopts the glass look in place
-  // (no pill, no inset, no max-width) — just a bg + blur fade-in.
   const innerStyle = {
     display: 'grid',
     gridTemplateColumns: 'auto 1fr auto',
     alignItems: 'center',
-    padding: '14px 120px 14px 48px',
-    background: scrolled ? 'rgba(20,20,20,0.55)' : 'transparent',
-    borderBottom: scrolled ? '1px solid rgba(255,255,255,0.12)' : '1px solid transparent',
+    background: (scrolled || mobileOpen) ? 'rgba(20,20,20,0.55)' : 'transparent',
+    borderBottom: (scrolled || mobileOpen) ? '1px solid rgba(255,255,255,0.12)' : '1px solid transparent',
     boxShadow: scrolled ? '0 12px 40px rgba(0,0,0,0.35)' : 'none',
-    backdropFilter: scrolled ? 'blur(20px) saturate(160%)' : 'none',
-    WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(160%)' : 'none',
+    backdropFilter: (scrolled || mobileOpen) ? 'blur(20px) saturate(160%)' : 'none',
+    WebkitBackdropFilter: (scrolled || mobileOpen) ? 'blur(20px) saturate(160%)' : 'none',
     pointerEvents: 'auto',
     transition: [
       `background 350ms ${EASE}`,
@@ -180,31 +189,117 @@ const Nav = ({ route, go, scrolled }) => {
     ].join(', '),
   };
 
+  // Hamburger icon (morphs into X when open)
+  const Hamburger = () => (
+    <button
+      type="button"
+      aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+      aria-expanded={mobileOpen}
+      onClick={() => setMobileOpen(o => !o)}
+      className="bg-nav-hamburger"
+      style={{
+        width: 44, height: 44, padding: 10,
+        background: 'transparent', border: 0, cursor: 'pointer',
+        alignItems: 'center', justifyContent: 'center',
+        pointerEvents: 'auto',
+      }}
+    >
+      <span aria-hidden="true" style={{
+        position: 'relative', display: 'block', width: 22, height: 14,
+      }}>
+        <span style={{
+          position: 'absolute', left: 0, right: 0, height: 1.5, background: '#fff',
+          top: mobileOpen ? 6 : 0,
+          transform: mobileOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+          transition: 'transform 260ms cubic-bezier(0.4,0,0.2,1), top 260ms cubic-bezier(0.4,0,0.2,1), opacity 200ms',
+        }}/>
+        <span style={{
+          position: 'absolute', left: 0, right: 0, top: 6, height: 1.5, background: '#fff',
+          opacity: mobileOpen ? 0 : 1,
+          transition: 'opacity 160ms',
+        }}/>
+        <span style={{
+          position: 'absolute', left: 0, right: 0, height: 1.5, background: '#fff',
+          top: mobileOpen ? 6 : 13,
+          transform: mobileOpen ? 'rotate(-45deg)' : 'rotate(0deg)',
+          transition: 'transform 260ms cubic-bezier(0.4,0,0.2,1), top 260ms cubic-bezier(0.4,0,0.2,1)',
+        }}/>
+      </span>
+    </button>
+  );
+
   return (
     <div style={outerStyle}>
-      <nav className="r-nav-bar" style={innerStyle}>
+      <nav style={innerStyle} className="bg-nav-inner">
         <a
           onClick={(e) => { e.preventDefault(); go('home'); }}
           href="#/home"
           style={{ display: 'flex', alignItems: 'center' }}
         >
           <img
-            className="r-nav-logo"
             src="assets/brinell-wordmark-white.png"
             alt="Brinell Group"
-            style={{
-              height: 60,
-              objectFit: 'contain',
-            }}
+            className="bg-nav-logo"
+            style={{ objectFit: 'contain' }}
           />
         </a>
         <div/>
-        <div className="r-nav-links" style={{ display: 'flex', gap: 36, alignItems: 'center', justifyContent: 'flex-end' }}>
+        <div className="bg-nav-desktop">
           <NavLink to="home">{t('nav.home')}</NavLink>
           <NavLink to="careers">{t('nav.careers')}</NavLink>
           <LangSwitch/>
         </div>
+        <Hamburger/>
       </nav>
+
+      {/* Mobile full-screen menu */}
+      <div
+        aria-hidden={!mobileOpen}
+        style={{
+          position: 'fixed', inset: 0, top: 0,
+          background: 'rgba(8,8,8,0.96)',
+          backdropFilter: 'blur(24px) saturate(160%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+          opacity: mobileOpen ? 1 : 0,
+          visibility: mobileOpen ? 'visible' : 'hidden',
+          pointerEvents: mobileOpen ? 'auto' : 'none',
+          transition: 'opacity 320ms ease, visibility 320ms',
+          display: 'flex', flexDirection: 'column',
+          paddingTop: 96, paddingLeft: 28, paddingRight: 28, paddingBottom: 48,
+          zIndex: 49,
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <a
+            href="#/home"
+            onClick={(e) => { e.preventDefault(); setMobileOpen(false); go('home'); }}
+            style={{
+              fontFamily: "'Archivo Black', sans-serif",
+              fontSize: 44, lineHeight: 1.0, letterSpacing: '-0.02em',
+              color: '#fff', textDecoration: 'none', fontWeight: 400,
+              opacity: route === 'home' ? 1 : 0.78,
+            }}
+          >{t('nav.home')}</a>
+          <a
+            href="#/careers"
+            onClick={(e) => { e.preventDefault(); setMobileOpen(false); go('careers'); }}
+            style={{
+              fontFamily: "'Archivo Black', sans-serif",
+              fontSize: 44, lineHeight: 1.0, letterSpacing: '-0.02em',
+              color: '#fff', textDecoration: 'none', fontWeight: 400,
+              opacity: route === 'careers' ? 1 : 0.78,
+            }}
+          >{t('nav.careers')}</a>
+        </div>
+        <div style={{ marginTop: 'auto', paddingTop: 36, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 11, letterSpacing: '1.4px', textTransform: 'uppercase',
+            color: '#666',
+          }}>{t('nav.lang.label')}</div>
+          <LangSwitch/>
+        </div>
+      </div>
     </div>
   );
 };

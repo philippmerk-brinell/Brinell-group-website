@@ -4,7 +4,7 @@ const CareersHero = () => {
   return (
     <section
       data-screen-label="01 Careers Hero"
-      className="r-sec-h"
+      className="bg-hero"
       style={{
         position: 'relative',
         minHeight: 'calc(100vh + 10px)',
@@ -14,7 +14,6 @@ const CareersHero = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
-        padding: '0 48px',
       }}
     >
       <video
@@ -35,13 +34,13 @@ const CareersHero = () => {
         pointerEvents: 'none',
       }}/>
 
-      <div style={{
-        position: 'relative', padding: '0 0 96px',
+      <div className="bg-hero-inner" style={{
+        position: 'relative',
         maxWidth: 1720, width: '100%', margin: '0 auto', marginTop: 160,
       }}>
         <h1 style={{
           fontFamily: "'Archivo Black', sans-serif",
-          fontSize: 'clamp(45px, 6.4vw, 106px)',
+          fontSize: 'clamp(36px, 6.4vw, 106px)',
           lineHeight: 0.98, letterSpacing: '-0.02em', margin: 0,
           maxWidth: '14ch', fontWeight: 400,
         }}>
@@ -123,7 +122,7 @@ const PrincipleCard = ({ num, index, label, body, total }) => {
   return (
     <article
       ref={ref}
-      className="r-principle-card"
+      className="bg-principle-card"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
@@ -203,14 +202,11 @@ const CareersWhy = () => {
   return (
     <section
       data-screen-label="02 Principles"
-      className="r-sec-h r-sec-v-lg"
-      style={{ background: '#000', color: '#fff', padding: '140px 48px' }}
+      className="bg-section bg-section-mid"
+      style={{ background: '#000', color: '#fff' }}
     >
       <div style={{ maxWidth: 1720, margin: '0 auto' }}>
-        <div className="r-grid-split" style={{
-          display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 96,
-          alignItems: 'end', marginBottom: 80,
-        }}>
+        <div className="bg-split-12" style={{ marginBottom: 80 }}>
           <div>
             <div style={{
               fontFamily: "'JetBrains Mono', monospace",
@@ -221,7 +217,7 @@ const CareersWhy = () => {
             </div>
             <h2 style={{
               fontFamily: "'Archivo Black', sans-serif",
-              fontSize: 'clamp(40px, 5vw, 76px)',
+              fontSize: 'clamp(32px, 5vw, 76px)',
               lineHeight: 1.02, letterSpacing: '-0.015em', margin: 0,
               maxWidth: '16ch', fontWeight: 400,
             }}>
@@ -236,10 +232,7 @@ const CareersWhy = () => {
           </p>
         </div>
 
-        <div className="r-grid-2" style={{
-          display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 0,
-          borderTop: '1px solid rgba(255,255,255,0.08)',
-        }}>
+        <div className="bg-tiles-2" style={{ borderTopColor: 'rgba(255,255,255,0.08)' }}>
           {items.map((it, i) => {
             const num = String(i + 1);
             return <PrincipleCard key={num} num={num} index={i} label={it.label} body={it.body} total={items.length}/>;
@@ -263,9 +256,9 @@ const CareersRoles = () => {
   return (
     <section
       data-screen-label="03 Open Roles"
-      className="r-sec-h r-sec-v-lg"
+      className="bg-section bg-section-mid"
       style={{
-        background: '#000', color: '#fff', padding: '140px 48px',
+        background: '#000', color: '#fff',
         borderTop: '1px solid #1a1a1a',
       }}
     >
@@ -284,7 +277,7 @@ const CareersRoles = () => {
             </div>
             <h2 style={{
               fontFamily: "'Archivo Black', sans-serif",
-              fontSize: 'clamp(40px, 5vw, 76px)',
+              fontSize: 'clamp(32px, 5vw, 76px)',
               lineHeight: 1.02, letterSpacing: '-0.015em', margin: 0,
               maxWidth: '14ch', fontWeight: 400,
             }}>
@@ -297,10 +290,10 @@ const CareersRoles = () => {
           {roles.map((r, i) => (
             <a
               key={r.id}
+              className="bg-role-row"
               href={r.href || '#'}
               target={r.href ? '_blank' : undefined}
               rel={r.href ? 'noopener noreferrer' : undefined}
-              className="r-roles-row"
               style={{
                 display: 'grid', gridTemplateColumns: '1fr auto',
                 alignItems: 'center', gap: 36, padding: '28px 0',
@@ -348,17 +341,14 @@ const CareersProcess = () => {
   return (
     <section
       data-screen-label="04 Process"
-      className="r-sec-h r-sec-v-lg"
+      className="bg-section bg-section-mid"
       style={{
-        background: '#000', color: '#fff', padding: '140px 48px',
+        background: '#000', color: '#fff',
         borderTop: '1px solid #1a1a1a',
       }}
     >
       <div style={{ maxWidth: 1720, margin: '0 auto' }}>
-        <div className="r-grid-split" style={{
-          display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 96,
-          alignItems: 'end', marginBottom: 80,
-        }}>
+        <div className="bg-split-12" style={{ marginBottom: 80 }}>
           <div>
             <div style={{
               fontFamily: "'JetBrains Mono', monospace",
@@ -369,7 +359,7 @@ const CareersProcess = () => {
             </div>
             <h2 style={{
               fontFamily: "'Archivo Black', sans-serif",
-              fontSize: 'clamp(40px, 5vw, 76px)',
+              fontSize: 'clamp(32px, 5vw, 76px)',
               lineHeight: 1.02, letterSpacing: '-0.015em', margin: 0,
               maxWidth: '16ch', fontWeight: 400,
             }}>
@@ -384,10 +374,7 @@ const CareersProcess = () => {
           </p>
         </div>
 
-        <div className="r-grid-2" style={{
-          display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 0,
-          borderTop: '1px solid rgba(255,255,255,0.08)',
-        }}>
+        <div className="bg-tiles-2" style={{ borderTopColor: 'rgba(255,255,255,0.08)' }}>
           {steps.map((s, i) => {
             const num = String(i + 1);
             return <PrincipleCard key={num} num={num} index={i} label={s.title} body={s.body} total={steps.length}/>;
@@ -403,10 +390,10 @@ const CareersApply = () => {
   return (
     <section
       data-screen-label="05 Apply"
-      className="r-apply"
+      className="bg-section bg-section-mid"
       style={{
         position: 'relative', overflow: 'hidden',
-        background: '#000', color: '#fff', padding: '160px 48px',
+        background: '#000', color: '#fff',
         borderTop: '1px solid #1a1a1a',
       }}
     >
@@ -427,7 +414,7 @@ const CareersApply = () => {
         </div>
         <h2 style={{
           fontFamily: "'Archivo Black', sans-serif",
-          fontSize: 'clamp(40px, 5vw, 76px)',
+          fontSize: 'clamp(32px, 5vw, 76px)',
           lineHeight: 1.02, letterSpacing: '-0.015em', margin: '0 auto',
           maxWidth: '18ch', fontWeight: 400,
         }}>

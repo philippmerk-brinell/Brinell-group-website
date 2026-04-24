@@ -238,80 +238,128 @@ code, pre, kbd {
 ::selection { background: var(--showroom-white); color: var(--velvet-black); }
 
 /* ============================================================
-   RESPONSIVE
-   Utility classes applied alongside inline styles.
-   Media queries use !important to override inline declarations.
-   Breakpoints: tablet ≤1024px, mobile ≤768px.
+   RESPONSIVE — breakpoints: 1280 / 900 / 640
+   Inline styles in components set the desktop defaults;
+   these classes + media queries override on smaller screens.
    ============================================================ */
 
-/* Tablet */
-@media (max-width: 1024px) {
-  .r-sec-h { padding-left: 32px !important; padding-right: 32px !important; }
-  .r-sec-v-xl { padding-top: 140px !important; padding-bottom: 140px !important; }
-  .r-sec-v-lg { padding-top: 110px !important; padding-bottom: 110px !important; }
-  .r-sec-v-mix-xl { padding-top: 160px !important; padding-bottom: 64px !important; }
-  .r-sec-v-mix-md { padding-top: 24px !important; padding-bottom: 120px !important; }
-  .r-grid-split { grid-template-columns: 1fr !important; gap: 48px !important; }
-  .r-footer-grid { gap: 36px !important; }
-  .r-nav-bar { padding: 14px 32px !important; }
+/* ---- SECTION padding ---- */
+.bg-section { padding-left: 48px; padding-right: 48px; }
+@media (max-width: 900px) { .bg-section { padding-left: 28px; padding-right: 28px; } }
+@media (max-width: 640px) { .bg-section { padding-left: 20px; padding-right: 20px; } }
+
+/* ---- Vertical rhythm on big feature sections ---- */
+.bg-section-tall { padding-top: 220px; padding-bottom: 220px; }
+@media (max-width: 1280px) { .bg-section-tall { padding-top: 160px; padding-bottom: 160px; } }
+@media (max-width: 900px)  { .bg-section-tall { padding-top: 110px; padding-bottom: 110px; } }
+@media (max-width: 640px)  { .bg-section-tall { padding-top: 84px;  padding-bottom: 84px;  } }
+
+.bg-section-mid { padding-top: 140px; padding-bottom: 140px; }
+@media (max-width: 1280px) { .bg-section-mid { padding-top: 110px; padding-bottom: 110px; } }
+@media (max-width: 900px)  { .bg-section-mid { padding-top: 80px;  padding-bottom: 80px;  } }
+@media (max-width: 640px)  { .bg-section-mid { padding-top: 64px;  padding-bottom: 64px;  } }
+
+/* ---- Two-column split → stack under 900 ---- */
+.bg-split-12 { display: grid; grid-template-columns: 1.2fr 1fr; gap: 96px; align-items: start; }
+.bg-split-13 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 96px; align-items: end; }
+@media (max-width: 1280px) {
+  .bg-split-12, .bg-split-13 { gap: 64px; }
+}
+@media (max-width: 900px) {
+  .bg-split-12, .bg-split-13 { grid-template-columns: 1fr; gap: 40px; align-items: start; }
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .r-sec-h { padding-left: 20px !important; padding-right: 20px !important; }
-  .r-sec-v-xl { padding-top: 96px !important; padding-bottom: 96px !important; }
-  .r-sec-v-lg { padding-top: 80px !important; padding-bottom: 80px !important; }
-  .r-sec-v-mix-xl { padding-top: 120px !important; padding-bottom: 48px !important; }
-  .r-sec-v-mix-md { padding-top: 16px !important; padding-bottom: 96px !important; }
+/* ---- Stats row: 3-up → stacked hairlines on mobile ---- */
+.bg-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid rgba(255,255,255,0.2); }
+@media (max-width: 900px) {
+  .bg-stats-grid { grid-template-columns: 1fr; }
+  .bg-stats-grid > * { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.2); padding: 40px 0 !important; }
+  .bg-stats-grid > *:last-child { border-bottom: none; }
+}
 
-  .r-grid-split { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .r-grid-2 { grid-template-columns: 1fr !important; }
-  .r-grid-3 { grid-template-columns: 1fr !important; }
-  .r-roles-row { grid-template-columns: 1fr !important; gap: 8px !important; padding: 24px 0 !important; }
+/* ---- 2-up tile grids (pillars, principles, process) ---- */
+.bg-tiles-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border-top: 1px solid rgba(255,255,255,0.15); }
+@media (max-width: 900px) {
+  .bg-tiles-2 { grid-template-columns: 1fr; }
+  /* Collapse any right-borders and reset the desktop negative-margin image outsets. */
+  .bg-tiles-2 > * { border-right: none !important; }
+  .bg-tiles-2 .bg-tile-outset { margin-left: 0 !important; margin-right: 0 !important; margin-top: 0 !important; }
+}
 
-  /* Stats cards: side-by-side borders become stacked bottom borders */
-  .r-stat-card {
-    border-right: none !important;
-    padding: 36px 0 !important;
-    border-bottom: 1px solid rgba(255,255,255,0.2) !important;
-    transform-origin: left center !important;
-  }
-  .r-stat-card-last { border-bottom: none !important; }
+/* ---- Roles list: title + details on one row → stack ---- */
+@media (max-width: 640px) {
+  .bg-role-row { grid-template-columns: 1fr !important; gap: 10px !important; padding: 22px 0 !important; }
+  .bg-role-row:hover { padding-left: 0 !important; }
+}
 
-  /* Pillar tiles: kill the computed desktop paddings/borders/outset */
-  .r-pillar-tile {
-    padding: 48px 0 !important;
-    border-right: none !important;
-    border-bottom: 1px solid rgba(255,255,255,0.2) !important;
-  }
-  .r-pillar-tile-last { border-bottom: none !important; }
-  .r-pillar-outset { margin: 0 !important; }
+/* ---- Nav (mobile) — hamburger menu helpers ---- */
+.bg-nav-desktop { display: flex; gap: 36px; align-items: center; justify-content: flex-end; }
+.bg-nav-hamburger { display: none; }
+@media (max-width: 780px) {
+  .bg-nav-desktop { display: none; }
+  .bg-nav-hamburger { display: inline-flex; }
+}
 
-  /* Principle cards (careers) */
-  .r-principle-card {
-    padding: 40px 20px 44px !important;
-    min-height: auto !important;
-    border-right: none !important;
-  }
+/* Nav inner padding */
+.bg-nav-inner { padding: 14px 120px 14px 48px; }
+@media (max-width: 1280px) { .bg-nav-inner { padding: 14px 48px; } }
+@media (max-width: 900px)  { .bg-nav-inner { padding: 12px 24px; } }
+@media (max-width: 640px)  { .bg-nav-inner { padding: 10px 20px; } }
 
-  /* Footer */
-  .r-footer { padding: 96px 20px 32px !important; }
-  .r-footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; padding-bottom: 48px !important; }
-  .r-footer-bottom {
-    flex-direction: column !important;
-    gap: 14px !important;
-    align-items: flex-start !important;
-  }
+/* Nav logo scales down */
+.bg-nav-logo { height: 60px; }
+@media (max-width: 900px) { .bg-nav-logo { height: 44px; } }
+@media (max-width: 640px) { .bg-nav-logo { height: 36px; } }
 
-  /* Nav: tighter on mobile */
-  .r-nav-bar { padding: 10px 20px !important; }
-  .r-nav-logo { height: 36px !important; }
-  .r-nav-links { gap: 18px !important; }
+/* ---- Footer grid ---- */
+.bg-footer-cols { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 48px; padding-bottom: 64px; border-bottom: 1px solid #1a1a1a; }
+@media (max-width: 900px) {
+  .bg-footer-cols { grid-template-columns: 1fr 1fr; gap: 36px; padding-bottom: 48px; }
+  .bg-footer-cols > :first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .bg-footer-cols { grid-template-columns: 1fr; gap: 28px; }
+}
 
-  /* Careers apply CTA — let it breathe on small screens */
-  .r-apply { padding: 96px 20px !important; }
+.bg-footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+@media (max-width: 640px) {
+  .bg-footer-bottom { flex-direction: column; align-items: flex-start; }
+}
 
-  /* Imprint hero */
-  .r-imprint-hero { padding: 140px 20px 48px !important; }
-  .r-imprint-body { padding: 16px 20px 96px !important; }
+.bg-footer-section { padding: 140px 48px 36px; }
+@media (max-width: 900px) { .bg-footer-section { padding: 96px 28px 28px; } }
+@media (max-width: 640px) { .bg-footer-section { padding: 72px 20px 24px; } }
+
+/* ---- Imprint hero padding ---- */
+.bg-imprint-hero { padding: 220px 48px 96px; }
+@media (max-width: 900px) { .bg-imprint-hero { padding: 160px 28px 72px; } }
+@media (max-width: 640px) { .bg-imprint-hero { padding: 128px 20px 56px; } }
+
+.bg-imprint-content { padding: 32px 48px 160px; }
+@media (max-width: 900px) { .bg-imprint-content { padding: 24px 28px 112px; } }
+@media (max-width: 640px) { .bg-imprint-content { padding: 16px 20px 88px; } }
+
+/* ---- Hero padding on small screens — floor min-height, lift bottom padding ---- */
+.bg-hero { padding: 0 48px; }
+@media (max-width: 900px) { .bg-hero { padding: 0 28px; } }
+@media (max-width: 640px) { .bg-hero { padding: 0 20px; } }
+
+.bg-hero-inner { padding: 0 0 96px; }
+@media (max-width: 900px) { .bg-hero-inner { padding: 0 0 72px; } }
+@media (max-width: 640px) { .bg-hero-inner { padding: 0 0 56px; } }
+
+/* Pillars header paragraph has no content on mobile — hide to kill the gap */
+@media (max-width: 900px) { .bg-hide-mobile { display: none; } }
+
+/* Generic: right-align on desktop, left on mobile */
+@media (max-width: 900px) {
+  .bg-align-right-desktop { justify-content: flex-start !important; text-align: left !important; }
+}
+
+/* Principle cards — tighter padding on mobile */
+@media (max-width: 900px) {
+  .bg-principle-card { padding: 36px 24px 40px !important; min-height: 0 !important; }
+}
+@media (max-width: 640px) {
+  .bg-principle-card { padding: 32px 4px 36px !important; }
 }

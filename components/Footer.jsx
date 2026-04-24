@@ -38,24 +38,17 @@ const Footer = ({ go }) => {
     <footer
       id="contact"
       data-screen-label="Footer"
-      className="r-footer"
+      className="bg-footer-section"
       style={{
         background: '#000',
         color: '#fff',
-        padding: '140px 48px 36px',
         borderTop: '1px solid #1a1a1a',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
       <div style={{ maxWidth: 1720, margin: '0 auto', position: 'relative', zIndex: 2 }}>
-        <div className="r-footer-grid" style={{
-          display: 'grid',
-          gridTemplateColumns: '1.6fr 1fr 1fr',
-          gap: 48,
-          paddingBottom: 64,
-          borderBottom: '1px solid #1a1a1a',
-        }}>
+        <div className="bg-footer-cols">
           <div>
             <img src="assets/brinell-icon-white.png" alt="" style={{ height: 40, marginBottom: 24 }}/>
             <div style={{
@@ -144,10 +137,7 @@ const Footer = ({ go }) => {
           </div>
         </div>
 
-        <div className="r-footer-bottom" style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+        <div className="bg-footer-bottom" style={{
           paddingTop: 24,
           borderTop: '1px solid #1a1a1a',
           fontFamily: "'JetBrains Mono', monospace",

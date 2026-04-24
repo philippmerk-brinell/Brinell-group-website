@@ -4,7 +4,7 @@ const HomeHero = () => {
   return (
     <section
       data-screen-label="01 Home Hero"
-      className="r-sec-h"
+      className="bg-hero"
       style={{
         position: 'relative',
         minHeight: 'calc(100vh + 10px)',
@@ -14,7 +14,6 @@ const HomeHero = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
-        padding: '0 48px',
       }}
     >
       <video
@@ -40,13 +39,13 @@ const HomeHero = () => {
         pointerEvents: 'none',
       }}/>
 
-      <div style={{
-        position: 'relative', padding: '0 0 96px',
+      <div className="bg-hero-inner" style={{
+        position: 'relative',
         maxWidth: 1720, width: '100%', margin: '0 auto',
       }}>
         <h1 style={{
           fontFamily: "'Archivo Black', sans-serif",
-          fontSize: 'clamp(56px, 8.5vw, 132px)',
+          fontSize: 'clamp(40px, 8.5vw, 132px)',
           lineHeight: 0.98,
           textTransform: 'none',
           letterSpacing: '-0.02em',
@@ -94,10 +93,9 @@ const HomeIntro = ({ go }) => {
   return (
     <section
       data-screen-label="02 Home Intro"
-      className="r-sec-h r-sec-v-xl"
+      className="bg-section bg-section-tall"
       style={{
         position: 'relative', overflow: 'hidden', background: '#000', color: '#fff',
-        padding: '220px 48px',
       }}
     >
       <video
@@ -123,9 +121,8 @@ const HomeIntro = ({ go }) => {
         pointerEvents: 'none',
       }}/>
 
-      <div className="r-grid-split" style={{
+      <div className="bg-split-12" style={{
         position: 'relative', maxWidth: 1720, margin: '0 auto',
-        display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 96, alignItems: 'start',
       }}>
         <div>
           <div style={{
@@ -137,7 +134,7 @@ const HomeIntro = ({ go }) => {
           </div>
           <h2 style={{
             fontFamily: "'Archivo Black', sans-serif",
-            fontSize: 'clamp(40px, 5vw, 76px)',
+            fontSize: 'clamp(32px, 5vw, 76px)',
             lineHeight: 1.02, letterSpacing: '-0.015em', margin: 0,
             maxWidth: '14ch', fontWeight: 400,
           }}>
@@ -174,7 +171,6 @@ const StatCard = ({ s, i }) => {
   const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
   return (
     <div
-      className={`r-stat-card${i === 2 ? ' r-stat-card-last' : ''}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
@@ -218,10 +214,9 @@ const HomeStats = () => {
   return (
     <section
       data-screen-label="03 Home Stats"
-      className="r-sec-h r-sec-v-xl"
+      className="bg-section bg-section-tall"
       style={{
         position: 'relative', overflow: 'hidden', background: '#000', color: '#fff',
-        padding: '220px 48px',
       }}
     >
       <div style={{ position: 'relative', maxWidth: 1720, margin: '0 auto' }}>
@@ -236,7 +231,7 @@ const HomeStats = () => {
             </div>
             <h2 style={{
               fontFamily: "'Archivo Black', sans-serif",
-              fontSize: 'clamp(36px, 4.2vw, 64px)',
+              fontSize: 'clamp(30px, 4.2vw, 64px)',
               lineHeight: 1.02, letterSpacing: '-0.015em', margin: 0,
               maxWidth: '17ch', fontWeight: 400,
             }}>
@@ -245,10 +240,7 @@ const HomeStats = () => {
           </div>
         </div>
 
-        <div className="r-grid-3" style={{
-          display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0,
-          borderTop: '1px solid rgba(255,255,255,0.2)',
-        }}>
+        <div className="bg-stats-grid">
           {stats.map((s, i) => <StatCard key={i} s={s} i={i} />)}
         </div>
       </div>
@@ -314,14 +306,11 @@ const HomePillars = () => {
   return (
     <section
       data-screen-label="04 Home Pillars"
-      className="r-sec-h r-sec-v-xl"
-      style={{ background: '#000', color: '#fff', padding: '220px 48px' }}
+      className="bg-section bg-section-tall"
+      style={{ background: '#000', color: '#fff' }}
     >
       <div style={{ maxWidth: 1720, margin: '0 auto' }}>
-        <div className="r-grid-split" style={{
-          display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 96,
-          alignItems: 'end', marginBottom: 72,
-        }}>
+        <div className="bg-split-12" style={{ marginBottom: 72 }}>
           <div>
             <div style={{
               fontFamily: "'JetBrains Mono', monospace",
@@ -331,23 +320,21 @@ const HomePillars = () => {
               {t('home.pillars.eyebrow')}
             </div>
             <h2 style={{
-              fontFamily: "'Archivo Black', sans-serif", fontSize: '76px',
+              fontFamily: "'Archivo Black', sans-serif",
+              fontSize: 'clamp(36px, 5vw, 76px)',
               lineHeight: 1.02, letterSpacing: '-0.015em', margin: 0,
               maxWidth: '20ch', fontWeight: 400,
             }}>
               {t('home.pillars.title.a')}<span style={{ fontStyle: 'italic' }}>{t('home.pillars.title.em')}</span>{t('home.pillars.title.b')}
             </h2>
           </div>
-          <p style={{
+          <p className="bg-hide-mobile" style={{
             fontFamily: "'Inter', sans-serif", fontSize: 16, lineHeight: 1.6,
             color: '#999', margin: 0, maxWidth: '46ch',
           }}>{"\n"}</p>
         </div>
 
-        <div className="r-grid-2" style={{
-          display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 0,
-          borderTop: '1px solid rgba(255,255,255,0.2)',
-        }}>
+        <div className="bg-tiles-2">
           {tiles.map((tile, i) => {
             const col = i % 2;
             const row = Math.floor(i / 2);
@@ -359,11 +346,9 @@ const HomePillars = () => {
               marginLeft: col === 1 ? -padSide : 0,
               marginBottom: 0,
             };
-            const isLast = i === tiles.length - 1;
             return (
               <article
                 key={i}
-                className={`r-pillar-tile${isLast ? ' r-pillar-tile-last' : ''}`}
                 style={{
                   padding: row === 0
                     ? (col === 0 ? `${padTop}px ${padSide}px 56px 0` : `${padTop}px 0 56px ${padSide}px`)
@@ -372,7 +357,7 @@ const HomePillars = () => {
                   borderBottom: row === 0 ? '1px solid rgba(255,255,255,0.2)' : 'none',
                 }}
               >
-                <div className="r-pillar-outset" style={tileOutset}>
+                <div className="bg-tile-outset" style={tileOutset}>
                   <ImageTile tone={tile.tone} video={tile.video}/>
                 </div>
                 <div style={{
@@ -432,11 +417,11 @@ const HomeClosing = ({ go }) => {
   return (
     <section
       data-screen-label="06 Home Closing"
-      className="r-sec-h"
+      className="bg-hero"
       style={{
         position: 'relative', minHeight: '92vh', overflow: 'hidden',
         background: '#000', color: '#fff',
-        display: 'flex', alignItems: 'flex-end', padding: '0 48px',
+        display: 'flex', alignItems: 'flex-end',
       }}
     >
       <video
@@ -457,10 +442,9 @@ const HomeClosing = ({ go }) => {
         pointerEvents: 'none',
       }}/>
 
-      <div className="r-grid-split" style={{
+      <div className="bg-split-13" style={{
         position: 'relative', padding: '0 0 160px',
         maxWidth: 1720, width: '100%', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: 96, alignItems: 'end',
       }}>
         <div>
           <div style={{
@@ -472,14 +456,14 @@ const HomeClosing = ({ go }) => {
           </div>
           <h2 style={{
             fontFamily: "'Archivo Black', sans-serif",
-            fontSize: 'clamp(40px, 5vw, 88px)',
+            fontSize: 'clamp(32px, 5vw, 88px)',
             lineHeight: 1.02, letterSpacing: '-0.015em', margin: 0,
             maxWidth: '16ch', fontWeight: 400, whiteSpace: 'pre-line',
           }}>
             {t('home.closing.title.a')}<span style={{ fontStyle: 'italic' }}>{t('home.closing.title.em')}</span>{t('home.closing.title.b')}
           </h2>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: 6 }}>
+        <div className="bg-align-right-desktop" style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: 6 }}>
           <Button onClick={() => go('careers')}>{t('home.closing.cta')}</Button>
         </div>
       </div>
