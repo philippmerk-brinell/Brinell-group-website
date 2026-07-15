@@ -1,0 +1,13 @@
+# Node / Cloudflare Worker
+node_modules/
+.wrangler/
+.dev.vars
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Secrets / lokale Umgebung
+.env
+.env.*
