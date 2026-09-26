@@ -246,11 +246,13 @@ const CareersWhy = () => {
 const CareersRoles = () => {
   const t = useT();
   const roles = [
-    { title: t('careers.roles.1'), id: 'R-01', href: 'https://scythe-pint-825.notion.site/Head-of-Energy-Investments-347a781a4c68804aa6b9cc4a89c08fc9?pvs=74' },
-    { title: t('careers.roles.2'), id: 'R-02', href: 'https://scythe-pint-825.notion.site/Head-of-Energy-Project-Development-347a781a4c68800c8cacf1a40a209b6a' },
-    { title: t('careers.roles.3'), id: 'R-03', href: 'https://scythe-pint-825.notion.site/Business-Development-Manager-Grid-347a781a4c6880c2992cc6d623276e5f?pvs=73' },
-    { title: t('careers.roles.4'), id: 'R-04', href: 'https://scythe-pint-825.notion.site/Founder-Associate-Intern-347a781a4c688080acddf67b69d70a12?pvs=73' },
-    { title: t('careers.roles.5'), id: 'R-05', href: 'https://scythe-pint-825.notion.site/executive-assistant?pvs=73' },
+    { title: t('careers.roles.1'), id: 'R-01', employer: 'Brinell Compute', loc: t('careers.roles.loc.eu'), href: 'https://scythe-pint-825.notion.site/electrical-engineering' },
+    { title: t('careers.roles.2'), id: 'R-02', employer: 'Brinell Compute', loc: t('careers.roles.loc.plovdiv'), href: 'https://scythe-pint-825.notion.site/project-manager' },
+    { title: t('careers.roles.3'), id: 'R-03', employer: 'Brinell Compute', loc: t('careers.roles.loc.eu'), href: 'https://scythe-pint-825.notion.site/development-manager' },
+    { title: t('careers.roles.4'), id: 'R-04', employer: 'Brinell Group', loc: t('careers.roles.loc.munich'), href: 'https://scythe-pint-825.notion.site/marketing-communications?pvs=73' },
+    { title: t('careers.roles.5'), id: 'R-05', employer: 'Brinell Group', loc: t('careers.roles.loc.munich'), href: 'https://scythe-pint-825.notion.site/head-of-finance?pvs=73' },
+    { title: t('careers.roles.6'), id: 'R-06', employer: 'Brinell Group', loc: t('careers.roles.loc.munich'), href: 'https://scythe-pint-825.notion.site/Founder-Associate-Intern-m-w-d-347a781a4c688080acddf67b69d70a12' },
+    { title: t('careers.roles.7'), id: 'R-07', employer: 'Brinell Group', loc: t('careers.roles.loc.munich'), href: 'https://scythe-pint-825.notion.site/executive-assistant' },
   ];
 
   return (
@@ -305,10 +307,17 @@ const CareersRoles = () => {
               onMouseOver={e => { e.currentTarget.style.paddingLeft = '16px'; }}
               onMouseOut={e => { e.currentTarget.style.paddingLeft = '0'; }}
             >
+              <div>
               <div style={{
                 fontFamily: "'Archivo Black', sans-serif", fontSize: 22,
                 letterSpacing: '-0.005em', lineHeight: 1.1, color: '#fff', fontWeight: 400,
               }}>{r.title}</div>
+                <div style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 11, letterSpacing: '1.2px', textTransform: 'uppercase',
+                  color: '#999', marginTop: 12, lineHeight: 1.5,
+                }}>{r.employer} · {r.loc}</div>
+              </div>
               <div style={{
                 fontFamily: "'JetBrains Mono', monospace",
                 fontSize: 12, letterSpacing: '1.4px', textTransform: 'uppercase', color: '#fff',
